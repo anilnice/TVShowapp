@@ -24,6 +24,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import coil.compose.rememberAsyncImagePainter
 import com.anil.tvshowapp.TvShowsApplication
@@ -47,12 +48,13 @@ fun TvShowItem(item: Show, view: View, id: Int) {
             .fillMaxWidth(),
         onClick = {
             PreferencesManager(TvShowsApplication.appContext).saveTvShowData(item)
-            view.findNavController().navigate(id)
+            val bundle = bundleOf("show" to item)
+            view.findNavController().navigate(id, bundle)
 
         }
     ) {
         Box(
-            modifier = Modifier,
+            modifier = Modifier.padding(4.dp),
             contentAlignment = Alignment.Center
         ) {
             Column {
@@ -81,45 +83,60 @@ fun TvShowItem(item: Show, view: View, id: Int) {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TVShowCard(show: Show) {
-    Box(
+fun TVShowCard(show: Show, view: View, id: Int) {
+    Card(
+        elevation = CardDefaults.cardElevation(5.dp),
+        shape = RoundedCornerShape(5.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        ),
         modifier = Modifier
-            .width(120.dp)
-            .height(200.dp)
-            .padding(4.dp)
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            .padding(5.dp)
+            .fillMaxWidth(),
+        onClick = {
+            val bundle = bundleOf("show" to show)
+            view.findNavController().navigate(id, bundle)
+        }) {
+        Box(
+            modifier = Modifier
+                .width(120.dp)
+                .height(200.dp)
+                .padding(4.dp)
         ) {
-            val actorImg =
-                rememberAsyncImagePainter(model = Constants.IMAGE_URL + show.posterPath)
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                val actorImg =
+                    rememberAsyncImagePainter(model = Constants.IMAGE_URL + show.posterPath)
 
-            Image(
-                painter = actorImg,
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(150.dp)
-                    .clip(RoundedCornerShape(8.dp))
-            )
-            Text(
-                text = show.originalName,
-                modifier = Modifier.width(120.dp),
-                maxLines = 1,
-                style = MaterialTheme.typography.bodyMedium.copy(
-                    fontWeight = FontWeight.Bold
+                Image(
+                    painter = actorImg,
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(150.dp)
+                        .clip(RoundedCornerShape(8.dp))
                 )
-            )
-            Text(
-                text = show.firstAirDate,
-                modifier = Modifier.width(120.dp),
-                maxLines = 1,
-                style = MaterialTheme.typography.bodyMedium
-            )
+                Text(
+                    text = show.originalName,
+                    modifier = Modifier.width(120.dp),
+                    maxLines = 1,
+                    style = MaterialTheme.typography.bodyMedium.copy(
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+                Text(
+                    text = show.firstAirDate,
+                    modifier = Modifier.width(120.dp),
+                    maxLines = 1,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
         }
     }
 

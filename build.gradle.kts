@@ -6,13 +6,7 @@ plugins {
     id("com.android.library") version "8.1.4" apply false
 }
 
-/*
-buildscript {
-    // Define versions in a single place
-    extra.apply{
-        set("nav_version", "2.7.5")
-    }
-
+/*buildscript {
     repositories {
         google()
         mavenCentral()

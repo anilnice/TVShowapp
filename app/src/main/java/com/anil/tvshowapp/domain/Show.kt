@@ -1,8 +1,11 @@
 package com.anil.tvshowapp.domain
 
+import android.os.Parcelable
 import com.anil.tvshowapp.remote.data.Result
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Show(
     @SerializedName("adult")
     val adult: Boolean,
@@ -32,7 +35,7 @@ data class Show(
     val voteAverage: Double,
     @SerializedName("vote_count")
     val voteCount: Int
-)
+) : Parcelable
 
 fun Result.toShow() = Show(
     adult,

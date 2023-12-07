@@ -28,5 +28,6 @@
             app:popUpToInclusive="true"
             app:restoreState="true"
             app:popUpToSaveState="true"/>
+
     </fragment>
 </navigation>

@@ -1,9 +1,9 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    //id("androidx.navigation.safeargs")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -41,9 +41,13 @@ android {
     }
 
     buildFeatures {
-        dataBinding = true
         compose = true
     }
+
+    dataBinding {
+        enable = true
+    }
+    
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
     }
