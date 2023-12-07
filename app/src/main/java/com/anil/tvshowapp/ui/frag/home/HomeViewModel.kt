@@ -18,8 +18,12 @@ class HomeViewModel @Inject constructor(private val getTvUseCase: GetTvUseCase) 
     private val _tv_shows = MutableStateFlow(emptyList<Show>())
     val tv_shows: StateFlow<List<Show>> get() = _tv_shows.asStateFlow()
 
-
     private var tvShowName: String? = null
+
+
+    init {
+        getWeekTrendShows()
+    }
 
     fun setTvshowName(showName: String) {
         tvShowName = showName
@@ -28,10 +32,27 @@ class HomeViewModel @Inject constructor(private val getTvUseCase: GetTvUseCase) 
 
     private fun getTvShows(tvShowName: String) {
         viewModelScope.launch {
+            val tvShows: List<Show>
             try {
-                val tvShows = getTvUseCase.getTvshows(tvShowName)
+                tvShows = if(!tvShowName.isEmpty()){
+                    getTvUseCase.getTvshows(tvShowName)
+                }else{
+                    getTvUseCase.getWeekTrendShows()
+                }
                 _tv_shows.value = tvShows
                 Log.d("TAG-", "getTvShows: ${tvShows.size}")
+            } catch (e: Exception) {
+                Log.d("TAG-", "getTvShows: ${e.message}")
+            }
+        }
+    }
+
+    private fun getWeekTrendShows() {
+        viewModelScope.launch {
+            try {
+                val trendTvShows = getTvUseCase.getWeekTrendShows()
+                _tv_shows.value = trendTvShows
+                Log.d("TAG-", "getTvShows: ${trendTvShows.size}")
             } catch (e: Exception) {
                 Log.d("TAG-", "getTvShows: ${e.message}")
             }

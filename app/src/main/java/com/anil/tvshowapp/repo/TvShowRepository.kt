@@ -18,4 +18,10 @@ class TvShowRepository @Inject constructor(private val tvShowService: TvShowServ
             it.toShow()
         }
     }
+
+    suspend fun getWeekTrendShows(): List<Show>{
+        return tvShowService.getWeekTrendShows().map {
+            it.toShow()
+        }
+    }
 }

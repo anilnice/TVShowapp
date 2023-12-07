@@ -40,11 +40,11 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater)
+        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+
         binding.composeView.setContent {
             TvShowList()
         }
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-
         binding.searchShow.setOnEditorActionListener(object : OnEditorActionListener {
             override fun onEditorAction(p0: TextView?, p1: Int, p2: KeyEvent?): Boolean {
                 if (p1 == EditorInfo.IME_ACTION_SEARCH) {

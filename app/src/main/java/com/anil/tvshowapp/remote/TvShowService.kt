@@ -20,4 +20,11 @@ class TvShowService @Inject constructor(private val tvApiClient: TvApiClient) {
             similarShows.body()!!.shows
         }
     }
+
+    suspend fun getWeekTrendShows(): List<Result>{
+        return withContext(Dispatchers.IO){
+            val weekTrendShows = tvApiClient.getWeekTrendShow()
+            weekTrendShows.body()!!.shows
+        }
+    }
 }

@@ -14,4 +14,7 @@ interface TvApiClient {
     @GET(Constants.SIMILAR_TV_SHOW)
     suspend fun getSimilarShows(@Path("series_id") series_id: String): Response<TvShows>
 
+    @GET(Constants.WEEK_TREND_TV_SHOW)
+    suspend fun getWeekTrendShow(): Response<TvShows>
+
 }
