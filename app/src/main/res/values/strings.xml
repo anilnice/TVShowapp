@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">TVShowapp</string>
     <string name="label">Enter Tv Show</string>
+    <string name="similar_shows">Similar shows</string>
+    <string name="backdrop_image">backdrop image</string>
+    <string name="description">Description</string>
 </resources>
