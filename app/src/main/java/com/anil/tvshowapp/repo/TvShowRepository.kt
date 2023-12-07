@@ -12,4 +12,10 @@ class TvShowRepository @Inject constructor(private val tvShowService: TvShowServ
             it.toShow()
         }
     }
+
+    suspend fun getSimilarShows(series_id: String): List<Show> {
+        return tvShowService.getSimilarShows(series_id).map {
+            it.toShow()
+        }
+    }
 }

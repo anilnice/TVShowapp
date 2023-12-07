@@ -8,4 +8,8 @@ class GetTvUseCase @Inject constructor(private val tvShowRepository: TvShowRepos
     suspend fun getTvshows(tvShowName: String): List<Show> {
         return tvShowRepository.getTVShows(tvShowName)
     }
+
+    suspend fun getSimilarShows(series_id: String): List<Show> {
+        return tvShowRepository.getSimilarShows(series_id)
+    }
 }

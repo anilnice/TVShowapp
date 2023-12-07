@@ -2,7 +2,6 @@ package com.anil.tvshowapp.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.NavHostFragment
 import com.anil.tvshowapp.R
 import dagger.hilt.android.AndroidEntryPoint
 

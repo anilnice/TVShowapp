@@ -13,4 +13,11 @@ class TvShowService @Inject constructor(private val tvApiClient: TvApiClient) {
             tvShows.body()!!.shows
         }
     }
+
+    suspend fun getSimilarShows(series_id: String): List<Result> {
+        return withContext(Dispatchers.IO) {
+            val similarShows = tvApiClient.getSimilarShows(series_id)
+            similarShows.body()!!.shows
+        }
+    }
 }
