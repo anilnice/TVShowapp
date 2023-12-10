@@ -1,50 +1,59 @@
 package com.anil.tvshowapp.domain
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
 import com.anil.tvshowapp.remote.data.Result
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
+@Entity("favorites")
 data class Show(
     @SerializedName("adult")
-    val adult: Boolean,
+    var adult: Boolean,
     @SerializedName("backdrop_path")
-    val backdropPath: String?,
+    var backdropPath: String?,
     @SerializedName("first_air_date")
-    val firstAirDate: String,
-    @SerializedName("genre_ids")
-    val genreIds: List<Int>,
+    var firstAirDate: String,
+    /*@SerializedName("genre_ids")
+    @Ignore
+    var genreIds: List<Int>,*/
     @SerializedName("id")
-    val id: Int,
+    @PrimaryKey
+    var id: Int,
     @SerializedName("name")
-    val name: String,
-    @SerializedName("origin_country")
-    val originCountry: List<String>,
+    var name: String,
+    /*@SerializedName("origin_country")
+    @Ignore
+    var originCountry: List<String>,*/
     @SerializedName("original_language")
-    val originalLanguage: String,
+    var originalLanguage: String,
     @SerializedName("original_name")
-    val originalName: String,
+    var originalName: String,
     @SerializedName("overview")
-    val overview: String,
+    var overview: String,
     @SerializedName("popularity")
-    val popularity: Double,
+    var popularity: Double,
     @SerializedName("poster_path")
-    val posterPath: String?,
+    var posterPath: String?,
     @SerializedName("vote_average")
-    val voteAverage: Double,
+    var voteAverage: Double,
     @SerializedName("vote_count")
-    val voteCount: Int
-) : Parcelable
+    var voteCount: Int
+) : Parcelable{
+
+}
 
 fun Result.toShow() = Show(
     adult,
     backdropPath,
     firstAirDate,
-    genreIds,
+    //genreIds,
     id,
     name,
-    originCountry,
+    //originCountry,
     originalLanguage,
     originalName,
     overview,

@@ -4,6 +4,7 @@ plugins {
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
     id("kotlin-parcelize")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -47,7 +48,7 @@ android {
     dataBinding {
         enable = true
     }
-    
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
     }
@@ -108,6 +109,8 @@ dependencies {
 
     implementation("io.coil-kt:coil-compose:2.5.0")
 
+    implementation("androidx.room:room-runtime:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
 
 }
 

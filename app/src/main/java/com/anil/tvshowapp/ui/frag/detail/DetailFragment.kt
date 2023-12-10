@@ -36,6 +36,9 @@ class DetailFragment : Fragment() {
         binding = FragmentDetailBinding.inflate(inflater)
         val show = arguments?.getParcelable("show", Show::class.java)
         binding.tvshow = show
+        binding.favorite.setOnClickListener {
+            binding.favorite.setImageResource(R.drawable.baseline_favorite_24)
+        }
         viewModel.setShowID(show?.id.toString())
         binding.similarShows.setContent {
             Similarshows()
