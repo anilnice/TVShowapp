@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -29,6 +30,7 @@ import androidx.navigation.findNavController
 import coil.compose.rememberAsyncImagePainter
 import com.anil.tvshowapp.TvShowsApplication
 import com.anil.tvshowapp.domain.Show
+import com.anil.tvshowapp.domain.TvSeason
 import com.anil.tvshowapp.util.Constants
 import com.anil.tvshowapp.util.PreferencesManager
 
@@ -47,7 +49,6 @@ fun TvShowItem(item: Show, view: View, id: Int) {
             .padding(5.dp)
             .fillMaxWidth(),
         onClick = {
-            PreferencesManager(TvShowsApplication.appContext).saveTvShowData(item)
             val bundle = bundleOf("show" to item)
             view.findNavController().navigate(id, bundle)
 
@@ -139,5 +140,66 @@ fun TVShowCard(show: Show, view: View, id: Int) {
             }
         }
     }
+}
 
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SeasonEpisodeCard(item: TvSeason, requireView: View, actionDetailfragmentSelf: Int) {
+    Card(
+        elevation = CardDefaults.cardElevation(5.dp),
+        shape = RoundedCornerShape(5.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        ),
+        modifier = Modifier
+            .padding(5.dp)
+            .fillMaxWidth()
+    ) {
+        Box(
+            modifier = Modifier
+                .width(120.dp)
+                .height(200.dp)
+                .padding(4.dp)
+        ) {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                val seasonPoster =
+                    rememberAsyncImagePainter(model = Constants.IMAGE_URL + item.posterPath)
+
+                Image(
+                    painter = seasonPoster,
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(150.dp)
+                        .clip(RoundedCornerShape(8.dp))
+                )
+                Text(
+                    text = item.name!!,
+                    modifier = Modifier.width(120.dp),
+                    maxLines = 1,
+                    style = MaterialTheme.typography.bodyMedium.copy(
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+                Row(
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    Text(text = "EPS:")
+                    Text(
+                        text = item.episodeCount.toString(),
+                        modifier = Modifier.width(120.dp),
+                        maxLines = 1,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
+
+            }
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package com.anil.tvshowapp.remote
 
 import com.anil.tvshowapp.remote.data.TvShows
+import com.anil.tvshowapp.remote.data.showdetails.Showdetails
 import com.anil.tvshowapp.util.Constants
 import retrofit2.Response
 import retrofit2.http.GET
@@ -17,4 +18,6 @@ interface TvApiClient {
     @GET(Constants.WEEK_TREND_TV_SHOW)
     suspend fun getWeekTrendShow(): Response<TvShows>
 
+    @GET(Constants.TV_SHOW_DETAILS)
+    suspend fun getShowDetails(@Path("series_id") series_id: String): Response<Showdetails>
 }

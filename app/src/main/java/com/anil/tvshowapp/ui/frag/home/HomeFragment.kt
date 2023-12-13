@@ -11,7 +11,6 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.TextView.OnEditorActionListener
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -49,7 +48,6 @@ class HomeFragment : Fragment() {
             override fun onEditorAction(p0: TextView?, p1: Int, p2: KeyEvent?): Boolean {
                 if (p1 == EditorInfo.IME_ACTION_SEARCH) {
                     binding.searchShow.hideKeyboard()
-                    Toast.makeText(context, p0?.text, Toast.LENGTH_LONG).show()
                     viewModel.setTvshowName(p0?.text.toString())
                     return true
                 }

@@ -16,4 +16,8 @@ class GetTvUseCase @Inject constructor(private val tvShowRepository: TvShowRepos
     suspend fun getWeekTrendShows(): List<Show> {
         return tvShowRepository.getWeekTrendShows()
     }
+
+    suspend fun getShowSeasons(series_id: String): List<TvSeason> {
+        return tvShowRepository.getShowDetails(series_id)
+    }
 }

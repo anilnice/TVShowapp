@@ -1,6 +1,7 @@
 package com.anil.tvshowapp.remote
 
 import com.anil.tvshowapp.remote.data.Result
+import com.anil.tvshowapp.remote.data.showdetails.Season
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -21,10 +22,17 @@ class TvShowService @Inject constructor(private val tvApiClient: TvApiClient) {
         }
     }
 
-    suspend fun getWeekTrendShows(): List<Result>{
-        return withContext(Dispatchers.IO){
+    suspend fun getWeekTrendShows(): List<Result> {
+        return withContext(Dispatchers.IO) {
             val weekTrendShows = tvApiClient.getWeekTrendShow()
             weekTrendShows.body()!!.shows
+        }
+    }
+
+    suspend fun getShowDetails(series_id: String): List<Season> {
+        return withContext(Dispatchers.IO) {
+            val showDetails = tvApiClient.getShowDetails(series_id)
+            showDetails.body()!!.seasons
         }
     }
 }

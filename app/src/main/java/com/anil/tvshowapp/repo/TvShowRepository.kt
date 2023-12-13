@@ -1,7 +1,9 @@
 package com.anil.tvshowapp.repo
 
 import com.anil.tvshowapp.domain.Show
+import com.anil.tvshowapp.domain.TvSeason
 import com.anil.tvshowapp.domain.toShow
+import com.anil.tvshowapp.domain.toTvSeason
 import com.anil.tvshowapp.remote.TvShowService
 import javax.inject.Inject
 
@@ -19,9 +21,15 @@ class TvShowRepository @Inject constructor(private val tvShowService: TvShowServ
         }
     }
 
-    suspend fun getWeekTrendShows(): List<Show>{
+    suspend fun getWeekTrendShows(): List<Show> {
         return tvShowService.getWeekTrendShows().map {
             it.toShow()
+        }
+    }
+
+    suspend fun getShowDetails(series_id: String): List<TvSeason> {
+        return tvShowService.getShowDetails(series_id).map {
+            it.toTvSeason()
         }
     }
 }

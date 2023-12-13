@@ -26,7 +26,7 @@ data class Show(
     @SerializedName("original_name")
     val originalName: String,
     @SerializedName("overview")
-    val overview: String,
+    var overview: String,
     @SerializedName("popularity")
     val popularity: Double,
     @SerializedName("poster_path")

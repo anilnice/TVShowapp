@@ -5,6 +5,7 @@ class Constants {
         const val BASE_URL = "https://api.themoviedb.org/3/"
         const val TV_SHOW_SEARCH = "search/tv?"
         const val SIMILAR_TV_SHOW = "tv/{series_id}/similar"
+        const val TV_SHOW_DETAILS = "tv/{series_id}"
         const val WEEK_TREND_TV_SHOW = "trending/tv/week"
         const val IMAGE_URL = "https://image.tmdb.org/t/p/w500/"
         const val TOKEN =

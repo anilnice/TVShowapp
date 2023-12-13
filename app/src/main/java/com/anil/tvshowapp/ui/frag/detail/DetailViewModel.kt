@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.anil.tvshowapp.R
 import com.anil.tvshowapp.domain.GetTvUseCase
 import com.anil.tvshowapp.domain.Show
+import com.anil.tvshowapp.domain.TvSeason
 import com.anil.tvshowapp.util.Constants
 import com.bumptech.glide.Glide
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -37,12 +38,16 @@ class DetailViewModel @Inject constructor(private val getTvUseCase: GetTvUseCase
     private val _similar_shows = MutableStateFlow(emptyList<Show>())
     val similar_shows: StateFlow<List<Show>> get() = _similar_shows.asStateFlow()
 
+    private val _show_seasons = MutableStateFlow(emptyList<TvSeason>())
+    val show_seasons: StateFlow<List<TvSeason>> get() = _show_seasons.asStateFlow()
+
 
     private var serial_id: String? = null
 
     fun setShowID(shodID: String) {
         serial_id = shodID
         getTvShows(serial_id!!)
+        getTvShowSeasons(serial_id!!)
     }
 
     private fun getTvShows(serialID: String) {
@@ -53,6 +58,18 @@ class DetailViewModel @Inject constructor(private val getTvUseCase: GetTvUseCase
                 Log.d("TAG-", "getTvShows similar: ${similarShows.size}")
             } catch (e: Exception) {
                 Log.d("TAG-", "getTvShows similar: ${e.message}")
+            }
+        }
+    }
+
+    private fun getTvShowSeasons(serialID: String) {
+        viewModelScope.launch {
+            try {
+                val showSeasons = getTvUseCase.getShowSeasons(serialID)
+                _show_seasons.value = showSeasons
+                //Log.d("TAG-", "getTvShowSeasons : ${showSeasons.size?:0}")
+            } catch (e: Exception) {
+                Log.d("TAG-", "getTvShowSeasons : ${e.message}")
             }
         }
     }
