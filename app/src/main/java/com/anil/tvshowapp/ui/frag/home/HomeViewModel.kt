@@ -34,9 +34,9 @@ class HomeViewModel @Inject constructor(private val getTvUseCase: GetTvUseCase) 
         viewModelScope.launch {
             val tvShows: List<Show>
             try {
-                tvShows = if(!tvShowName.isEmpty()){
+                tvShows = if (!tvShowName.isEmpty()) {
                     getTvUseCase.getTvshows(tvShowName)
-                }else{
+                } else {
                     getTvUseCase.getWeekTrendShows()
                 }
                 _tv_shows.value = tvShows

@@ -4,4 +4,5 @@
     <string name="similar_shows">Similar shows</string>
     <string name="backdrop_image">backdrop image</string>
     <string name="description">Description</string>
+    <string name="episodes">Episodes</string>
 </resources>
